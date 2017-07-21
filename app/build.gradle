@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+
 
 android {
     compileSdkVersion 26
@@ -20,11 +23,27 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
+//    compile 'com.jakewharton:butterknife:8.7.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+//    compile 'com.jakewharton:butterknife:8.7.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    //引入retrofit 网络框架,底层用的数据发送和请求,用的还是OKHttp 进行数据传输
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    //Gson数据解析
+    compile 'com.google.code.gson:gson:2.8.1'
+    //将retrofit和Gson向关联在一起
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.j256.ormlite:ormlite-android:5.0'
+    // 添加 dagger2
+    compile 'com.google.dagger:dagger:2.6'
+    apt 'com.google.dagger:dagger-compiler:2.6'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
 }

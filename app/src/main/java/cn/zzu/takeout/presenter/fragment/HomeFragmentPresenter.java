@@ -1,0 +1,95 @@
+package cn.zzu.takeout.presenter.fragment;
+
+import com.google.gson.Gson;
+
+import cn.zzu.takeout.model.ResponseInfo;
+import cn.zzu.takeout.model.net.ResponseInfoAPI;
+import cn.zzu.takeout.presenter.BasePresenter;
+import cn.zzu.takeout.ui.fragment.HomeFragment;
+import cn.zzu.takeout.utils.ErrorInfo;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
+/**
+ * Created by yangg on 2017/7/21.
+ * 首页的业务处理
+ */
+
+public class HomeFragmentPresenter extends BasePresenter {
+
+
+    public HomeFragment fragment;
+
+    public HomeFragmentPresenter(HomeFragment fragment) {
+        this.fragment = fragment;
+    }
+    /**
+     * 获取首页数据的步骤
+     * 1,需要在联网的api接口中增加一个回去首页数据的方法
+     * (访问方式和请求参数)
+     * 2,异步回去首页数据
+     * 3,数据处理
+     * 4,展示数据到界面上
+     */
+
+
+    /**
+     * 获取服务器短首页数据
+     */
+    public void getData() {
+
+
+        Call<ResponseInfo> call = responseInfoAPI.home();
+
+        call.enqueue(new Callback<ResponseInfo>() {
+            @Override
+            public void onResponse(Call<ResponseInfo> call, Response<ResponseInfo> response) {
+                //处理恢复
+                System.out.println(response);
+
+                if (response!= null &&response.isSuccessful()){
+                    ResponseInfo info = response.body();
+//                    if ("0".equals(info.code)){
+//                        //服务器处理成功,并且返回目标数据
+//
+//                        //解析数据
+//                        parserData(info.data);
+//                    }else {
+//                        //服务器处理成功,返回错误提示,妨碍信息需要展示给用户
+//                        //一句code值获取到失败的数据
+//                        String msg = ErrorInfo.INFO.get(info.code);
+//                        //提示用于  ,可以用吐司
+//                        filed(msg);
+//
+//                    }
+                }else {
+                    //联网中出现异常
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseInfo> call, Throwable t) {
+
+                //联网过程中异常
+            }
+        });
+    }
+
+    //出错了
+    private void filed(String msg) {
+        fragment.filed(msg);
+
+    }
+
+    //成功
+    private void parserData(String data){
+        Gson gson = new Gson();
+        //gson.fromJson(data,HomeInfo.class);
+
+
+        //fragment.success();
+       // fragment.getAdapter().setData();
+    }
+}
