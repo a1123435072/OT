@@ -3,10 +3,11 @@ package cn.zzu.takeout.presenter.fragment;
 import com.google.gson.Gson;
 
 import cn.zzu.takeout.model.ResponseInfo;
-import cn.zzu.takeout.model.net.ResponseInfoAPI;
+import cn.zzu.takeout.model.dao.Bean.HomeBean;
 import cn.zzu.takeout.presenter.BasePresenter;
 import cn.zzu.takeout.ui.fragment.HomeFragment;
 import cn.zzu.takeout.utils.ErrorInfo;
+import cn.zzu.takeout.utils.LogUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +22,7 @@ public class HomeFragmentPresenter extends BasePresenter {
 
 
     public HomeFragment fragment;
+
 
     public HomeFragmentPresenter(HomeFragment fragment) {
         this.fragment = fragment;
@@ -46,25 +48,31 @@ public class HomeFragmentPresenter extends BasePresenter {
         call.enqueue(new Callback<ResponseInfo>() {
             @Override
             public void onResponse(Call<ResponseInfo> call, Response<ResponseInfo> response) {
-                //处理恢复
-                System.out.println(response);
 
-                if (response!= null &&response.isSuccessful()){
+
+                //处理恢复
+                System.out.println("-->" + response);
+
+
+                if (response != null && response.isSuccessful()) {
+
                     ResponseInfo info = response.body();
-//                    if ("0".equals(info.code)){
-//                        //服务器处理成功,并且返回目标数据
-//
-//                        //解析数据
-//                        parserData(info.data);
-//                    }else {
-//                        //服务器处理成功,返回错误提示,妨碍信息需要展示给用户
-//                        //一句code值获取到失败的数据
-//                        String msg = ErrorInfo.INFO.get(info.code);
-//                        //提示用于  ,可以用吐司
-//                        filed(msg);
-//
-//                    }
-                }else {
+                    if ("0".equals(info.getCode())) {
+                        //服务器处理成功,并且返回目标数据
+                        LogUtils.s("-->" + "访问数据成功-------------");
+                        LogUtils.s("--->" + info.getData());
+                        //解析数据
+                        parserData(info.getData());
+
+                    } else {
+                        //服务器处理成功,返回错误提示,妨碍信息需要展示给用户
+                        //一句code值获取到失败的数据
+                        String msg = ErrorInfo.INFO.get(info.getCode());
+                        //提示用于  ,可以用吐司
+                        filed(msg);
+
+                    }
+                } else {
                     //联网中出现异常
                 }
             }
@@ -84,12 +92,12 @@ public class HomeFragmentPresenter extends BasePresenter {
     }
 
     //成功
-    private void parserData(String data){
+    private void parserData(String data) {
         Gson gson = new Gson();
-        //gson.fromJson(data,HomeInfo.class);
+        HomeBean homeBean = gson.fromJson(data, HomeBean.class);
 
-
+        // HomeBean.Seller.
         //fragment.success();
-       // fragment.getAdapter().setData();
+        fragment.getAdapter().setDate(homeBean);
     }
 }

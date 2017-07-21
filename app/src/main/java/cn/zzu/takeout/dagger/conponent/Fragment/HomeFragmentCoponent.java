@@ -1,4 +1,4 @@
-package cn.zzu.takeout.dagger.fragment;
+package cn.zzu.takeout.dagger.conponent.Fragment;
 
 import cn.zzu.takeout.dagger.module.fragment.HomeFragmetModule;
 import cn.zzu.takeout.ui.activity.MainActivity;

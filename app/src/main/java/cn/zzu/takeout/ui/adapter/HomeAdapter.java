@@ -7,16 +7,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import cn.zzu.takeout.R;
+import cn.zzu.takeout.model.dao.Bean.HomeBean;
+import cn.zzu.takeout.model.dao.Bean.HomeInfo;
 import cn.zzu.takeout.utils.UIUtils;
 
 /**
  * Created by yangg on 2017/7/21.
  */
 
-public class homeAdapter extends RecyclerView.Adapter {
+public class HomeAdapter extends RecyclerView.Adapter {
 
 
-//    private HomeInfo date;
+    private HomeBean date;
+
+    public void setDate(HomeBean date) {
+        this.date = date;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -24,6 +31,7 @@ public class homeAdapter extends RecyclerView.Adapter {
         textView.setText("zhangsa ");
 
         return new ViewHolder(textView);
+
     }
 
     @Override

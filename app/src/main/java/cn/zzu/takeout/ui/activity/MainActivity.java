@@ -12,6 +12,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.zzu.takeout.R;
 import cn.zzu.takeout.ui.fragment.HomeFragment;
 import cn.zzu.takeout.ui.fragment.MeFragment;
@@ -23,16 +25,20 @@ public class MainActivity extends AppCompatActivity {
 
     //创建fragment集合用来保存tab栏对应的fragment对象
     List<Fragment> fragments = new ArrayList<>();
+    @BindView(R.id.main_fragment_container)
+    FrameLayout mainFragmentContainer;
+    @BindView(R.id.main_bottome_switcher_container)
+    LinearLayout mainBottomeSwitcherContainer;
 
-
-    private LinearLayout mainBottomeSwitcherContainer;
+    // private LinearLayout mainBottomeSwitcherContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mainBottomeSwitcherContainer = (LinearLayout) findViewById(R.id.main_bottome_switcher_container);
+        //mainBottomeSwitcherContainer = (LinearLayout) findViewById(R.id.main_bottome_switcher_container);
 
         //2,创建fragment 保存到集合中
         fragments.add(new HomeFragment());
@@ -124,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
      * 由于我们要处理通用的item,我们可能要处理很多层,我们要去写递归,遍历孩子的孩子
      * 只要进来了,设置enable喂false
      */
-
 
 
 }

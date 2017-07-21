@@ -1,5 +1,6 @@
 package cn.zzu.takeout.ui.fragment;
 
+import android.animation.ArgbEvaluator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,11 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import javax.inject.Inject;
 
 import cn.zzu.takeout.R;
-import cn.zzu.takeout.model.ResponseInfo;
+import cn.zzu.takeout.dagger.conponent.Fragment.DaggerHomeFragmentCoponent;
+import cn.zzu.takeout.dagger.module.fragment.HomeFragmetModule;
 import cn.zzu.takeout.presenter.fragment.HomeFragmentPresenter;
-import cn.zzu.takeout.ui.adapter.homeAdapter;
+import cn.zzu.takeout.ui.adapter.HomeAdapter;
 import cn.zzu.takeout.utils.UIUtils;
 
 /**
@@ -27,10 +32,14 @@ import cn.zzu.takeout.utils.UIUtils;
 
 public class HomeFragment extends BaseFragment {
 
+    @Inject
+    HomeFragmentPresenter presenter;
+
     private RecyclerView recyclerView;
 
-    HomeFragmentPresenter presenter ;
 
+    private LinearLayout llTitleContainer;
+    private HomeAdapter homeAdapter;
 
 
     @Nullable
@@ -45,27 +54,57 @@ public class HomeFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        llTitleContainer = view.findViewById(R.id.ll_title_container);
+
+        //presenter = new HomeFragmentPresenter(this);
+
+
+        DaggerHomeFragmentCoponent coponent = (DaggerHomeFragmentCoponent) DaggerHomeFragmentCoponent
+                .builder()
+                .homeFragmetModule(new HomeFragmetModule(this))
+                .build();
+        coponent.in(this);
+
         recyclerView = view.findViewById(R.id.rv_home);
 
-        presenter = new HomeFragmentPresenter(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(
                 UIUtils.getContext(),
-                LinearLayoutManager.VERTICAL,false));
+                LinearLayoutManager.VERTICAL, false));
+        homeAdapter = new HomeAdapter();
 
-        recyclerView.setAdapter(new homeAdapter());
+        recyclerView.setAdapter(homeAdapter);
 
+        //rv设置滑动监听
         recyclerView.addOnScrollListener(rvListener);
 
     }
 
+    /**
+     * 监听RV的滚动
+     * 计算滑动距离的总和  占用最大距离的百分比
+     * 使用ArgbEvaluator 计算百分比对应的透明度的颜色值
+     * 设置头布局北京色
+     */
+    private int sumY = 0;
+    private float scope = 150;
+    private ArgbEvaluator evaluator = new ArgbEvaluator();
     private RecyclerView.OnScrollListener rvListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            System.out.println("dx-->" + dx + "dy-->" + dy);
+            sumY += dy;
+            int color = 0X553190E8;
+            if (sumY > 0) {
+                float percent = sumY > scope ? 1 : sumY / scope;
+                color = (Integer) evaluator.evaluate(percent, 0X553190E8, 0XFF3190E8);
+            }
 
+            llTitleContainer.setBackgroundColor(color);
         }
     };
+
     @Override
     public void onResume() {
         super.onResume();
@@ -82,16 +121,10 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-
-
-    /*public class ViewHolder extends RecyclerView.ViewHolder{
-
-
-
-         public ViewHolder(View itemView) {
-             super(itemView);
-             recyclerView = itemView.findViewById(R.id.rv_home);
-         }
-     }*/
-
+    public HomeAdapter getAdapter() {
+        if (homeAdapter != null) {
+            return homeAdapter;
+        }
+        return null;
+    }
 }
