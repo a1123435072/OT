@@ -8,6 +8,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+import static android.R.attr.id;
+
 /**
  * Created by Teacher on 2016/9/2.
  */
@@ -23,5 +25,7 @@ public interface ResponseInfoAPI {
      */
     @GET(Constant.HOME)
     Call<ResponseInfo> home();
+    @GET(Constant.GOODS+"/id="+id)
+    Call<ResponseInfo> goods(int id);
 
 }

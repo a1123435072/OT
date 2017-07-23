@@ -144,7 +144,6 @@ public class HomeFragment extends BaseFragment {
 
         return homeAdapter;
 
-
     }
 
 }

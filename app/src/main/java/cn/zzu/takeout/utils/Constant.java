@@ -10,5 +10,5 @@ public interface Constant {
     String BASEURL = "http://10.0.2.2:8080/";
     String LOGIN = "TakeoutService/login";
     String HOME = "TakeoutService/home";
-
+    String GOODS ="TakeoutService/goods";
 }
