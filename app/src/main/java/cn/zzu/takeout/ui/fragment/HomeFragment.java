@@ -2,6 +2,8 @@ package cn.zzu.takeout.ui.fragment;
 
 import android.animation.ArgbEvaluator;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -31,7 +37,7 @@ import cn.zzu.takeout.utils.UIUtils;
  */
 
 public class HomeFragment extends BaseFragment {
-
+    private Handler mHandler = new Handler(Looper.getMainLooper());
     @Inject
     HomeFragmentPresenter presenter;
 
@@ -39,8 +45,14 @@ public class HomeFragment extends BaseFragment {
 
 
     private LinearLayout llTitleContainer;
-    private HomeAdapter homeAdapter;
+    public HomeAdapter homeAdapter;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Nullable
     @Override
@@ -50,13 +62,16 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
+
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         llTitleContainer = view.findViewById(R.id.ll_title_container);
 
-        //presenter = new HomeFragmentPresenter(this);
 
 
         DaggerHomeFragmentCoponent coponent = (DaggerHomeFragmentCoponent) DaggerHomeFragmentCoponent
@@ -64,6 +79,9 @@ public class HomeFragment extends BaseFragment {
                 .homeFragmetModule(new HomeFragmetModule(this))
                 .build();
         coponent.in(this);
+
+
+
 
         recyclerView = view.findViewById(R.id.rv_home);
 
@@ -73,11 +91,13 @@ public class HomeFragment extends BaseFragment {
                 LinearLayoutManager.VERTICAL, false));
         homeAdapter = new HomeAdapter();
 
+
         recyclerView.setAdapter(homeAdapter);
 
         //rv设置滑动监听
         recyclerView.addOnScrollListener(rvListener);
-
+        //加载数据
+        presenter.getData();
     }
 
     /**
@@ -120,11 +140,11 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-
     public HomeAdapter getAdapter() {
-        if (homeAdapter != null) {
-            return homeAdapter;
-        }
-        return null;
+
+        return homeAdapter;
+
+
     }
+
 }

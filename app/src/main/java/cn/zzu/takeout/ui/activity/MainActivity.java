@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
             //设置点击监听
             child.setOnClickListener(switchListener);
         }
+
+        String event1 = "Event---001";
+        // 发布事件
+         EventBus.getDefault().post(event1);
 
     }
 

@@ -32,7 +32,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             synchronized (DBHelper.class) {
                 if (instance == null) {//第二层校验/.防止对象的多次创建
                     return new DBHelper(MyApplication.getmContext());
-//                    好几个
+
                 }
             }
         }

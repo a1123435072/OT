@@ -2,9 +2,15 @@ package cn.zzu.takeout.presenter.fragment;
 
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+import org.w3c.dom.Text;
+
+import java.util.List;
+
 import cn.zzu.takeout.model.ResponseInfo;
 import cn.zzu.takeout.model.dao.Bean.HomeBean;
 import cn.zzu.takeout.presenter.BasePresenter;
+import cn.zzu.takeout.ui.adapter.HomeAdapter;
 import cn.zzu.takeout.ui.fragment.HomeFragment;
 import cn.zzu.takeout.utils.ErrorInfo;
 import cn.zzu.takeout.utils.LogUtils;
@@ -21,8 +27,15 @@ import retrofit2.Response;
 public class HomeFragmentPresenter extends BasePresenter {
 
 
+
+
     public HomeFragment fragment;
 
+    private HomeAdapter adapter;
+
+    public HomeFragmentPresenter(HomeAdapter adapter) {
+        this.adapter = adapter;
+    }
 
     public HomeFragmentPresenter(HomeFragment fragment) {
         this.fragment = fragment;
@@ -96,8 +109,18 @@ public class HomeFragmentPresenter extends BasePresenter {
         Gson gson = new Gson();
         HomeBean homeBean = gson.fromJson(data, HomeBean.class);
 
+
+
+
         // HomeBean.Seller.
         //fragment.success();
         fragment.getAdapter().setDate(homeBean);
+        LogUtils.s("data-->" + data.toString());
+        // 发送Event，传递信息Event---001
+
+        //String event1 = "Event---001";
+        // 发布事件
+       // EventBus.getDefault().postSticky(event1);
+
     }
 }
