@@ -6,9 +6,12 @@ package cn.zzu.takeout.model.dao.Bean;
 
 public class Promotion {
     public  Integer id;
-    public  String name;
+    public  String info;
     public  String pic;
 
+    public String getInfo() {
+        return info;
+    }
 
     public Integer getId() {
         return id;
@@ -18,13 +21,7 @@ public class Promotion {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPic() {
         return pic;

@@ -2,11 +2,6 @@ package cn.zzu.takeout.presenter.fragment;
 
 import com.google.gson.Gson;
 
-import org.greenrobot.eventbus.EventBus;
-import org.w3c.dom.Text;
-
-import java.util.List;
-
 import cn.zzu.takeout.model.ResponseInfo;
 import cn.zzu.takeout.model.dao.Bean.HomeBean;
 import cn.zzu.takeout.presenter.BasePresenter;
@@ -26,13 +21,8 @@ import retrofit2.Response;
 
 public class HomeFragmentPresenter extends BasePresenter {
 
-
-
-
     public HomeFragment fragment;
-
     private HomeAdapter adapter;
-
     public HomeFragmentPresenter(HomeAdapter adapter) {
         this.adapter = adapter;
     }
@@ -49,19 +39,16 @@ public class HomeFragmentPresenter extends BasePresenter {
      * 4,展示数据到界面上
      */
 
-
     /**
      * 获取服务器短首页数据
      */
     public void getData() {
-
 
         Call<ResponseInfo> call = responseInfoAPI.home();
 
         call.enqueue(new Callback<ResponseInfo>() {
             @Override
             public void onResponse(Call<ResponseInfo> call, Response<ResponseInfo> response) {
-
 
                 //处理恢复
                 System.out.println("-->" + response);
@@ -108,9 +95,6 @@ public class HomeFragmentPresenter extends BasePresenter {
     private void parserData(String data) {
         Gson gson = new Gson();
         HomeBean homeBean = gson.fromJson(data, HomeBean.class);
-
-
-
 
         // HomeBean.Seller.
         //fragment.success();
