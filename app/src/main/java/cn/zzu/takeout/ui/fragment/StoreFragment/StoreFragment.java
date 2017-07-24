@@ -16,6 +16,7 @@ import cn.zzu.takeout.dagger.conponent.Fragment.Store.StoreFragmentCoponent;
 import cn.zzu.takeout.presenter.fragment.store.StoreFragmentPresenter;
 import cn.zzu.takeout.ui.adapter.HomeAdapter;
 import cn.zzu.takeout.ui.adapter.Store.StoreAdapter;
+import cn.zzu.takeout.utils.LogUtils;
 import cn.zzu.takeout.utils.UIUtils;
 
 /**
@@ -62,6 +63,7 @@ public class StoreFragment extends Fragment {
 
         Intent intent = new Intent();
         id = intent.getIntExtra("id", 1);
+        LogUtils.s("id--->"+id);
 
         //加载数据
         presenter.getStoreData(id);
