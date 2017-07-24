@@ -25,6 +25,7 @@ public interface ResponseInfoAPI {
      */
     @GET(Constant.HOME)
     Call<ResponseInfo> home();
+
     @GET(Constant.GOODS)
     Call<ResponseInfo> goods(int id);
 
