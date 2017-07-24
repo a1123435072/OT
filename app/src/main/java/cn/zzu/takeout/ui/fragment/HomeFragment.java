@@ -67,6 +67,8 @@ public class HomeFragment extends BaseFragment {
 
         llTitleContainer = view.findViewById(R.id.ll_title_container);
 
+
+       // presenter =new HomeFragmentPresenter(homeAdapter);
         DaggerHomeFragmentCoponent coponent = (DaggerHomeFragmentCoponent) DaggerHomeFragmentCoponent
                 .builder()
                 .homeFragmetModule(new HomeFragmetModule(this))
