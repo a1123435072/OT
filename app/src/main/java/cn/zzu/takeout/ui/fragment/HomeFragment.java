@@ -12,13 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
 import cn.zzu.takeout.R;
+
 import cn.zzu.takeout.dagger.conponent.Fragment.DaggerHomeFragmentCoponent;
 import cn.zzu.takeout.dagger.module.fragment.HomeFragmetModule;
 import cn.zzu.takeout.presenter.fragment.HomeFragmentPresenter;
@@ -63,25 +61,17 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         llTitleContainer = view.findViewById(R.id.ll_title_container);
-
-
 
         DaggerHomeFragmentCoponent coponent = (DaggerHomeFragmentCoponent) DaggerHomeFragmentCoponent
                 .builder()
                 .homeFragmetModule(new HomeFragmetModule(this))
                 .build();
         coponent.in(this);
-
-
-
 
         recyclerView = view.findViewById(R.id.rv_home);
 
