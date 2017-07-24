@@ -19,6 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import javax.inject.Inject;
 
 import cn.zzu.takeout.R;
+
 import cn.zzu.takeout.dagger.conponent.Fragment.DaggerHomeFragmentCoponent;
 import cn.zzu.takeout.dagger.module.fragment.HomeFragmetModule;
 import cn.zzu.takeout.presenter.fragment.HomeFragmentPresenter;
@@ -73,7 +74,7 @@ public class HomeFragment extends BaseFragment {
         llTitleContainer = view.findViewById(R.id.ll_title_container);
 
 
-
+       // presenter =new HomeFragmentPresenter(homeAdapter);
         DaggerHomeFragmentCoponent coponent = (DaggerHomeFragmentCoponent) DaggerHomeFragmentCoponent
                 .builder()
                 .homeFragmetModule(new HomeFragmetModule(this))
