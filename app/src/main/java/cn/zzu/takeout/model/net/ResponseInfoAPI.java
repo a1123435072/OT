@@ -27,6 +27,6 @@ public interface ResponseInfoAPI {
     Call<ResponseInfo> home();
 
     @GET(Constant.GOODS)
-    Call<ResponseInfo> goods(int id);
+    Call<ResponseInfo> goods(@Query("sellerId") Integer id);
 
 }

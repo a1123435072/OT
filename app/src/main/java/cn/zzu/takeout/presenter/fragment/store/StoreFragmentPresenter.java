@@ -2,9 +2,15 @@ package cn.zzu.takeout.presenter.fragment.store;
 
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import cn.zzu.takeout.model.ResponseInfo;
-import cn.zzu.takeout.model.dao.Bean.HomeBean;
+import cn.zzu.takeout.model.dao.StoreBean.Data;
 import cn.zzu.takeout.model.dao.StoreBean.StoreBean;
 import cn.zzu.takeout.presenter.BasePresenter;
 import cn.zzu.takeout.ui.fragment.StoreFragment.StoreFragment;
@@ -38,7 +44,7 @@ public class StoreFragmentPresenter extends BasePresenter {
      * 获取服务器短首页数据
      */
 
-    public void getStoreData(int id){
+    public void getStoreData(Integer id){
         Call<ResponseInfo> call = responseInfoAPI.goods(id);
 
         call.enqueue(new Callback<ResponseInfo>() {
@@ -55,7 +61,7 @@ public class StoreFragmentPresenter extends BasePresenter {
                     if ("0".equals(info.getCode())) {
                         //服务器处理成功,并且返回目标数据
                         LogUtils.s("-->" + "访问数据成功-------------");
-                        LogUtils.s("--->" + info.getData());
+                       // LogUtils.s("--->" + info.getData());
                         //解析数据
                         parserData(info.getData());
 
@@ -88,17 +94,19 @@ public class StoreFragmentPresenter extends BasePresenter {
     //成功
     private void parserData(String data) {
         Gson gson = new Gson();
-        StoreBean storeBean = gson.fromJson(data, StoreBean.class);
+
+        TypeToken<ArrayList<Data>> stroeType = new TypeToken<ArrayList<Data>>(){};
+
+        ArrayList<Data> dataList = gson.fromJson(data, stroeType.getType());
 
         // HomeBean.Seller.
         //fragment.success();
-        fragment.getStoreAdapter().setDate(storeBean);
-        LogUtils.s("data-->" + data.toString());
+//        fragment.getStoreAdapter().setDate(dataList);
+//        LogUtils.s("data-->" + data.toString());
         // 发送Event，传递信息Event---001
 
-        //String event1 = "Event---001";
+        String event1 = "Event---001";
         // 发布事件
-        // EventBus.getDefault().postSticky(event1);
-
+         EventBus.getDefault().postSticky(dataList);
     }
 }

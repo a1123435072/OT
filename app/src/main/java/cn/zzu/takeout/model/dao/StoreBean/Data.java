@@ -13,6 +13,16 @@ public class Data {
     public String name;
 
 
+    @Override
+    public String toString() {
+        return "Data{" +
+                "id=" + id +
+                ", info='" + info + '\'' +
+                ", list=" + list +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

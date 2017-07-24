@@ -2,6 +2,7 @@ package cn.zzu.takeout.ui.fragment.StoreFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import cn.zzu.takeout.R;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
-import cn.zzu.takeout.dagger.conponent.Fragment.Store.StoreFragmentCoponent;
+import java.util.ArrayList;
+
+import cn.zzu.takeout.R;
+import cn.zzu.takeout.model.dao.StoreBean.Data;
 import cn.zzu.takeout.presenter.fragment.store.StoreFragmentPresenter;
-import cn.zzu.takeout.ui.adapter.HomeAdapter;
+import cn.zzu.takeout.ui.activity.MainActivity;
 import cn.zzu.takeout.ui.adapter.Store.StoreAdapter;
 import cn.zzu.takeout.utils.LogUtils;
 import cn.zzu.takeout.utils.UIUtils;
@@ -32,9 +38,11 @@ public class StoreFragment extends Fragment {
     private StoreFragmentPresenter presenter;
     private int id;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -63,6 +71,7 @@ public class StoreFragment extends Fragment {
 
         Intent intent = new Intent();
         id = intent.getIntExtra("id", 1);
+
         LogUtils.s("id--->"+id);
 
         //加载数据
@@ -84,4 +93,13 @@ public class StoreFragment extends Fragment {
         presenter.getStoreData(id);
         super.onResume();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventAsync(ArrayList<Data> event4){
+
+        LogUtils.s("event1-->"+event4.toString());
+        String name = Thread.currentThread().getName();
+        final String content = "Thread = " + name + ";  onEventMainThread() ------->" + event4;
+    }
+
 }

@@ -11,7 +11,7 @@ class Eat {
     public Integer id;
     public Integer monthSaleNum;
     public String name;
-   // public boolean new;
+    //public boolean new;
     public float newPrice;
     public Integer oldPrice;
 

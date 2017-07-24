@@ -15,17 +15,18 @@ import cn.zzu.takeout.model.dao.StoreBean.StoreBean;
 import cn.zzu.takeout.utils.UIUtils;
 
 
-
 /**
  * Created by yangg on 2017/7/23.
  */
 
 public class StoreAdapter extends RecyclerView.Adapter {
     private StoreBean date;
+
     public void setDate(StoreBean date) {
         this.date = date;
         notifyDataSetChanged();
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(UIUtils.getContext()).inflate(R.layout.store_list, parent, false);
@@ -43,10 +44,14 @@ public class StoreAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return date.data.size();
+        if (date != null) {
+
+            return date.data.size();
+        }
+        return 0;
     }
 
-    public class StoreViewHolder extends RecyclerView.ViewHolder{
+    public class StoreViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvStore;
 
