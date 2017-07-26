@@ -3,6 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.zzu.takeout.ui.fragment.StoreFragment.StoreFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <ListView
+            android:id="@+id/rv_store"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:scrollbars="none">
+
+        </ListView>
+
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/shl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"></se.emilsjolander.stickylistheaders.StickyListHeadersListView>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/cart"
         android:layout_width="50dp"
@@ -34,30 +60,5 @@
             android:visibility="invisible" />
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_store"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:scrollbars="none">
-
-        </android.support.v7.widget.RecyclerView>
-
-        <!--<se.emilsjolander.stickylistheaders.StickyListHeadersListView
-            android:id="@+id/shl"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"></se.emilsjolander.stickylistheaders.StickyListHeadersListView>
--->
-
-    </LinearLayout>
 
 </FrameLayout>

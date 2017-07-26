@@ -12,6 +12,8 @@ public class Data {
     public List<Eat> list;
     public String name;
 
+    public int groupFirstIndex ;
+
 
     @Override
     public String toString() {

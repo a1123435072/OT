@@ -1,6 +1,8 @@
 package cn.zzu.takeout.presenter.fragment.store;
 
 
+import android.support.v4.app.Fragment;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -53,10 +55,7 @@ public class StoreFragmentPresenter extends BasePresenter {
 
                 //处理恢复
                 System.out.println("-->" + response);
-
-
                 if (response != null && response.isSuccessful()) {
-
                     ResponseInfo info = response.body();
                     if ("0".equals(info.getCode())) {
                         //服务器处理成功,并且返回目标数据
@@ -104,9 +103,8 @@ public class StoreFragmentPresenter extends BasePresenter {
 //        fragment.getStoreAdapter().setDate(dataList);
 //        LogUtils.s("data-->" + data.toString());
         // 发送Event，传递信息Event---001
-
-        String event1 = "Event---001";
         // 发布事件
-         EventBus.getDefault().postSticky(dataList);
+         //EventBus.getDefault().postSticky(dataList);
+        fragment.success(dataList);
     }
 }

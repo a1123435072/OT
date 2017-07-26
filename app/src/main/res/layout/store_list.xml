@@ -8,7 +8,6 @@
     <TextView
         android:id="@+id/tv_store_list"
         android:text="13.9特价套餐"
-        android:background="@drawable/select_storelist_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

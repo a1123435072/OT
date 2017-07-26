@@ -2,6 +2,8 @@ package cn.zzu.takeout.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by yangg on 2017/7/8.
@@ -63,6 +65,21 @@ public class UIUtils {
         float density = getResources().getDisplayMetrics().density;
         int dip = (int) (px / density + .5f);
         return dip;
+    }
+
+
+    /**
+     * 依据Id查询指定控件的父控件
+     * @param v 指定控件
+     * @param id 父容器标识
+     * @return
+     */
+    public static ViewGroup getContainder(View v, int id) {
+        ViewGroup parent = (ViewGroup) v.getParent();
+        if (parent.getId() == id) {
+            return parent;
+        }
+        return getContainder(parent, id);
     }
 
 }

@@ -22,6 +22,13 @@ android {
     }
 }
 
+//sms的libs依赖
+repositories{
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -32,6 +39,7 @@ dependencies {
     //将retrofit和Gson向关联在一起
     // 添加 dagger2
     //轮播图
+    // 分组显示数据的三方控件
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.google.code.gson:gson:2.8.1'
@@ -45,6 +53,12 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'com.google.dagger:dagger-compiler:2.6'
+    //SMS其他的依赖
+
+    compile name:'SMSSDK-3.0.0',ext:'aar'
+    compile name:'SMSSDKGUI-3.0.0',ext:'aar'
 }

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Process;
 
 
+import com.mob.MobApplication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
  * Created by yangg on 2017/7/8.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MobApplication {
 
 
     private static Context mContext;

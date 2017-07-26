@@ -4,16 +4,26 @@ package cn.zzu.takeout.model.dao.StoreBean;
  * Created by yangg on 2017/7/24.
  */
 
-class Eat {
+public class Eat {
     public boolean bargainPrice;
     public String form;
     public String icon;
     public Integer id;
     public Integer monthSaleNum;
     public String name;
-    //public boolean new;
+    public boolean isNew;
     public float newPrice;
     public Integer oldPrice;
+
+    //进行分组操作,同组数据该字段值相同
+    public int headId;
+    //当前条目对应投数据所在集合的下标
+    public int headIndex;
+
+    //用于购物数量统计
+    public int count;
+
+
 
     public boolean isBargainPrice() {
         return bargainPrice;

@@ -47,12 +47,7 @@ public class MeFragment extends BaseFragment {
 
         llUserInfo = view.findViewById(R.id.ll_userinfo);
 
-        llUserInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(UIUtils.getContext(),"点击了用户信息部分",Toast.LENGTH_SHORT).show();
-            }
-        });
+        llUserInfo.setOnClickListener(UserInfoListener);
     }
 
     /**
