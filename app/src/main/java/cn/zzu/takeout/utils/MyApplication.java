@@ -4,30 +4,35 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Process;
+import android.text.TextUtils;
 
 
+import com.google.gson.Gson;
 import com.mob.MobApplication;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.zzu.takeout.model.dao.login.LoginData;
+
 /**
  * Created by yangg on 2017/7/8.
  */
 
-public class MyApplication extends MobApplication {
+public class MyApplication extends Application {
 
 
     private static Context mContext;
     private static Handler mMainThreadHandlet;
     private static int mMainThread;
 
+    public static LoginData loginData;
 
     /**
      * 创建全局的单例
      * 用与做内存的缓存的集合
      */
-    private Map<String ,String > MemProtocolCacheMap = new HashMap<>();
+    private Map<String, String> MemProtocolCacheMap = new HashMap<>();
 
     public Map<String, String> getMemProtocolCacheMap() {
         return MemProtocolCacheMap;
@@ -65,5 +70,10 @@ public class MyApplication extends MobApplication {
          */
         mMainThread = Process.myTid();
         super.onCreate();
+
+        String user = ShapeUtil.get("user", "");
+        if (!TextUtils.isEmpty(user)) {
+            this.loginData = new Gson().fromJson(user, LoginData.class);
+        }
     }
 }

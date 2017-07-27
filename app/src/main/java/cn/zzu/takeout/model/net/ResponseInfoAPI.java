@@ -29,4 +29,7 @@ public interface ResponseInfoAPI {
     @GET(Constant.GOODS)
     Call<ResponseInfo> goods(@Query("sellerId") Integer id);
 
+    @GET(Constant.LOGIN)
+    Call<ResponseInfo> login(@Query("phone") String phoneNumber,@Query("type") String type);
+
 }
