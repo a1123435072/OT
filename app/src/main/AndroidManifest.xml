@@ -15,7 +15,6 @@
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".utils.MyApplication"
         android:allowBackup="true"
@@ -33,17 +32,18 @@
         </activity>
         <activity android:name=".ui.activity.StoreActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.CartActivity"></activity>
+        <activity android:name=".ui.activity.CartActivity" />
 
-        <!--sms的东西-->
+        <!-- sms的东西 -->
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <!-- 通过AndroidManifest配置AppKey和AppSecret，如果你选择通过代码配置，则不需要配置以下meta-data -->
-        <!--<meta-data android:name="Mob-AppKey" android:value="1fb7cd0fabbfe"/>-->
-        <!--<meta-data android:name="Mob-AppSecret" android:value="bc48028a37b012d283935af45b320c9d"/>-->
+        <!-- <meta-data android:name="Mob-AppKey" android:value="1fb7cd0fabbfe"/> -->
+        <!-- <meta-data android:name="Mob-AppSecret" android:value="bc48028a37b012d283935af45b320c9d"/> -->
+        <activity android:name=".ui.activity.JieSuanActivity"></activity>
     </application>
 
 </manifest>

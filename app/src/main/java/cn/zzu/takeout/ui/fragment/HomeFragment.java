@@ -76,12 +76,10 @@ public class HomeFragment extends BaseFragment {
 
         recyclerView = view.findViewById(R.id.rv_home);
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(
                 UIUtils.getContext(),
                 LinearLayoutManager.VERTICAL, false));
         homeAdapter = new HomeAdapter();
-
 
         recyclerView.setAdapter(homeAdapter);
 

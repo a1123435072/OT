@@ -1,6 +1,6 @@
 package cn.zzu.takeout.presenter;
 
-import cn.zzu.takeout.model.dao.DBHelper;
+import cn.zzu.takeout.model.db.DBHelper;
 import cn.zzu.takeout.model.net.ResponseInfoAPI;
 import cn.zzu.takeout.utils.Constant;
 import retrofit2.Retrofit;

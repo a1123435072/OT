@@ -1,4 +1,4 @@
-package cn.zzu.takeout.model.dao;
+package cn.zzu.takeout.model.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

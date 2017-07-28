@@ -112,9 +112,9 @@ public class StoreFragment extends Fragment implements AbsListView.OnScrollListe
         @Override
         public void onClick(View view) {
 
-
             Intent intent = new Intent(UIUtils.getContext(), CartActivity.class);
             UIUtils.getContext().startActivity(intent);
+
         }
     };
 

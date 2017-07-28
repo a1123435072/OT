@@ -76,6 +76,14 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
             holder = (NormalViewHolder) view.getTag();
         }
 
+        if (data.count == 0){
+            holder.ivMinus.setVisibility(View.GONE);
+            holder.tvMoney.setVisibility(View.GONE);
+        }else {
+            holder.ivMinus.setVisibility(View.VISIBLE);
+            holder.tvMoney.setVisibility(View.VISIBLE);
+            holder.setData(data);
+        }
         LogUtils.s("Eat data-->" + data);
 
         //设置标题内容
