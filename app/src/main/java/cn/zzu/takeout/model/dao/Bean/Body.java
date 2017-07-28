@@ -29,6 +29,7 @@ public class Body {
         this.recommendInfos = recommendInfos;
     }
 
+
     public Integer getType() {
         return type;
     }

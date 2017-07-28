@@ -13,4 +13,6 @@ public interface Constant {
     String HOME = "TakeoutService/home";
     String GOODS ="TakeoutService/goods";
     String LOGIN ="TakeoutService/login";
+
+    String ORDER ="TakeoutService/order";
 }

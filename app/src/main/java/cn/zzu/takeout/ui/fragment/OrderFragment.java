@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cn.zzu.takeout.R;
+import cn.zzu.takeout.presenter.fragment.orderFragmentPresenter;
+import cn.zzu.takeout.ui.adapter.HomeAdapter;
 import cn.zzu.takeout.ui.adapter.rvOrderAdapter;
 import cn.zzu.takeout.ui.views.RecycleViewDivider;
 import cn.zzu.takeout.utils.UIUtils;
@@ -29,6 +31,9 @@ public class OrderFragment extends BaseFragment {
 
     private RecyclerView rvOderList;
 
+    private rvOrderAdapter rvOrderAdapter;
+    private cn.zzu.takeout.presenter.fragment.orderFragmentPresenter orderFragmentPresenter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +48,20 @@ public class OrderFragment extends BaseFragment {
 
         initView(view);
 
+        orderFragmentPresenter = new orderFragmentPresenter(this);
+        orderFragmentPresenter.getOderData("1");
+
+
+    }
+
+    /**
+     * 界面可见的时候,加载数据
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        orderFragmentPresenter.getOderData("1");
+
     }
 
     private void initView(View view) {
@@ -51,8 +70,16 @@ public class OrderFragment extends BaseFragment {
         rvOderList.setLayoutManager(linearLayoutManager);
         // 设置分割线
         rvOderList.addItemDecoration(new RecycleViewDivider(UIUtils.getContext(),LinearLayoutManager.HORIZONTAL,1,0XE3E0DC));
-        rvOderList.setAdapter(new rvOrderAdapter());
+        rvOrderAdapter = new rvOrderAdapter();
+        rvOderList.setAdapter(rvOrderAdapter);
     }
 
 
+    public void filed(String msg) {
+
+    }
+
+    public rvOrderAdapter getAdapter() {
+        return rvOrderAdapter;
+    }
 }

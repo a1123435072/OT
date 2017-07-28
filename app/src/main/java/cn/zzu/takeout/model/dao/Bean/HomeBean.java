@@ -19,8 +19,6 @@ public class HomeBean {
         public Seller seller;
         public Integer type;
         public List<String> recommendInfos;
-
-
     }*/
 
 

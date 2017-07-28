@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class StoreBean {
+
     public List<Data> data;
 
     public List<Data> getData() {

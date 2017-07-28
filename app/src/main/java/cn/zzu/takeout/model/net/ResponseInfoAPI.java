@@ -31,5 +31,7 @@ public interface ResponseInfoAPI {
 
     @GET(Constant.LOGIN)
     Call<ResponseInfo> login(@Query("phone") String phoneNumber,@Query("type") String type);
+    @GET(Constant.ORDER)
+    Call<ResponseInfo> order(@Query("userId") String id);
 
 }
