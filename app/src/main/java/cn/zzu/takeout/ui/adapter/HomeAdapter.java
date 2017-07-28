@@ -163,25 +163,25 @@ public class HomeAdapter extends RecyclerView.Adapter implements BaseSliderView.
             headViewHolder.llFenlei.setOrientation(LinearLayout.HORIZONTAL);//设置Linearlayout为垂直方向布局
 
             List<Categorie> categorieList = data.head.getCategorieList();
-            for (int i = 0; i < categorieList.size(); i +=2) {
+            for (int i = 0; i < categorieList.size(); i += 2) {
                 View view = View.inflate(UIUtils.getContext(), R.layout.item_home_head_category, null);
 
 
-                ImageView ivTop =       view.findViewById(R.id.top_iv);
-                TextView tvTop =        view.findViewById(R.id.top_tv);
-                ImageView ivBottom =    view.findViewById(R.id.bottom_iv);
-                TextView tvBottom =     view.findViewById(R.id.bottom_tv);
+                ImageView ivTop = view.findViewById(R.id.top_iv);
+                TextView tvTop = view.findViewById(R.id.top_tv);
+                ImageView ivBottom = view.findViewById(R.id.bottom_iv);
+                TextView tvBottom = view.findViewById(R.id.bottom_tv);
 
-                ivTop.setPadding(10,10,10,10);
-                tvTop.setPadding(10,10,10,10);
-                ivBottom.setPadding(10,10,10,10);
-                tvBottom.setPadding(10,10,10,10);
+                ivTop.setPadding(10, 10, 10, 10);
+                tvTop.setPadding(10, 10, 10, 10);
+                ivBottom.setPadding(10, 10, 10, 10);
+                tvBottom.setPadding(10, 10, 10, 10);
                 Categorie categorie = categorieList.get(i);
                 String picUrl = categorie.getPic();
                 Picasso.with(UIUtils.getContext()).load(picUrl).into(ivTop);
                 tvTop.setText(categorie.getName());
 
-                Categorie categorie2 = categorieList.get(i+1);
+                Categorie categorie2 = categorieList.get(i + 1);
                 String picurl2 = categorie2.getPic();
                 Picasso.with(UIUtils.getContext()).load(picurl2).into(ivBottom);
                 tvBottom.setText(categorie2.getName());
@@ -228,14 +228,13 @@ public class HomeAdapter extends RecyclerView.Adapter implements BaseSliderView.
     private View.OnClickListener saleLintener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-           // Toast.makeText(UIUtils.getContext(),"dianji le " ,Toast.LENGTH_SHORT).show();
+            // Toast.makeText(UIUtils.getContext(),"dianji le " ,Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(UIUtils.getContext(), StoreActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("id",id);
+            intent.putExtra("id", id);
             UIUtils.getContext().startActivity(intent);
         }
     };
-
 
 
     public class SellerViewHolder extends RecyclerView.ViewHolder {
@@ -281,7 +280,6 @@ public class HomeAdapter extends RecyclerView.Adapter implements BaseSliderView.
 
         public SliderLayout sliderLayout;
         private final LinearLayout llFenlei;
-
 
 
         public HeadViewHolder(View itemView) {

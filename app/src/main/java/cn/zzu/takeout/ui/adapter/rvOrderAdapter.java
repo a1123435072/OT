@@ -1,5 +1,6 @@
 package cn.zzu.takeout.ui.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.zzu.takeout.R;
 import cn.zzu.takeout.model.dao.order.GoodsInfoss;
 import cn.zzu.takeout.model.dao.order.Order;
 import cn.zzu.takeout.utils.UIUtils;
+
+import static cn.smssdk.utils.a.d;
 
 /**
  * Created by yangg on 2017/7/28.
@@ -38,9 +42,23 @@ public class rvOrderAdapter extends RecyclerView.Adapter {
         OrderViewHolder orderViewHolder = (OrderViewHolder) holder;
 
         Order order = date.get(position);
-        GoodsInfoss goodsInfoss = order.goodsInfos.get(order.goodsInfos.size());
 
-        orderViewHolder.tvName.setText(goodsInfoss.name);
+
+
+        orderViewHolder.tvName.setText(order.seller.name);
+        /* List<GoodsInfoss> goodsInfos = order.goodsInfos;
+       for (int i = 0; i < goodsInfos.size(); i++) {
+
+            orderViewHolder.tvName.setText(goodsInfos.get(i).name);
+        }
+*/
+        orderViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent intent = new Intent(UIUtils.getContext(), );
+                //UIUtils.getContext().startActivity(intent);
+            }
+        });
 
     }
 
