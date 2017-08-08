@@ -1,6 +1,7 @@
 package cn.zzu.takeout.ui.fragment;
 
 import android.animation.ArgbEvaluator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import javax.inject.Inject;
@@ -20,6 +22,7 @@ import cn.zzu.takeout.R;
 import cn.zzu.takeout.dagger.conponent.Fragment.DaggerHomeFragmentCoponent;
 import cn.zzu.takeout.dagger.module.fragment.HomeFragmetModule;
 import cn.zzu.takeout.presenter.fragment.HomeFragmentPresenter;
+import cn.zzu.takeout.ui.activity.SelectLocationActivity;
 import cn.zzu.takeout.ui.adapter.HomeAdapter;
 import cn.zzu.takeout.utils.UIUtils;
 
@@ -44,6 +47,8 @@ public class HomeFragment extends BaseFragment {
 
     private LinearLayout llTitleContainer;
     public HomeAdapter homeAdapter;
+    private TextView tvHomeAddress;
+
 
 
     @Override
@@ -67,7 +72,9 @@ public class HomeFragment extends BaseFragment {
 
         llTitleContainer = view.findViewById(R.id.ll_title_container);
 
-       // presenter =new HomeFragmentPresenter(homeAdapter);
+        tvHomeAddress = view.findViewById(R.id.home_tv_address);
+        tvHomeAddress.setOnClickListener(addressListener);
+        // presenter =new HomeFragmentPresenter(homeAdapter);
         DaggerHomeFragmentCoponent coponent = (DaggerHomeFragmentCoponent) DaggerHomeFragmentCoponent
                 .builder()
                 .homeFragmetModule(new HomeFragmetModule(this))
@@ -135,4 +142,18 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    private View.OnClickListener addressListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(UIUtils.getContext(), SelectLocationActivity.class);
+            startActivityForResult(intent, 200);
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //在Fragment内部接收不到数据,需要通过activity在中间传递数据
+
+    }
 }

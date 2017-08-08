@@ -37,8 +37,8 @@ public class CartPresenter extends BasePresenter {
      * 获取服务器短首页数据
      */
 
-    public void getLoginData(String phoneNumber,String type){
-        Call<ResponseInfo> call = responseInfoAPI.login(phoneNumber,type);
+    public void getLoginData(String phoneNumber, String type) {
+        Call<ResponseInfo> call = responseInfoAPI.login(phoneNumber, type);
 
         call.enqueue(new Callback<ResponseInfo>() {
             @Override
@@ -51,7 +51,7 @@ public class CartPresenter extends BasePresenter {
                     if ("0".equals(info.getCode())) {
                         //服务器处理成功,并且返回目标数据
                         LogUtils.s("-->" + "访问数据成功-------------");
-                       // LogUtils.s("--->" + info.getData());
+                        // LogUtils.s("--->" + info.getData());
                         //解析数据
                         parserData(info.getData());
 
@@ -74,6 +74,7 @@ public class CartPresenter extends BasePresenter {
             }
         });
     }
+
     //出错了
     private void filed(String msg) {
         //mActivity.filed(msg);
@@ -86,14 +87,14 @@ public class CartPresenter extends BasePresenter {
 
         LoginData loginBean = gson.fromJson(data, LoginData.class);
 
-        mActivity.success(loginBean,data);
+        mActivity.success(loginBean, data);
         // HomeBean.Seller.
         //fragment.success();
-//        fragment.getStoreAdapter().setDate(dataList);
-//        LogUtils.s("data-->" + data.toString());
+        //        fragment.getStoreAdapter().setDate(dataList);
+        //        LogUtils.s("data-->" + data.toString());
         // 发送Event，传递信息Event---001
         // 发布事件
-         //EventBus.getDefault().postSticky(dataList);
+        //EventBus.getDefault().postSticky(dataList);
         //mActivity.success(dataList);
     }
 }

@@ -30,6 +30,8 @@ import cn.zzu.takeout.ui.activity.StoreActivity;
 import cn.zzu.takeout.utils.LogUtils;
 import cn.zzu.takeout.utils.UIUtils;
 
+import static android.R.attr.type;
+
 /**
  * Created by yangg on 2017/7/21.
  */
@@ -64,11 +66,12 @@ public class HomeAdapter extends RecyclerView.Adapter implements BaseSliderView.
     @Override
     public int getItemViewType(int position) {
 
-        int type = data.getBody().get(position).getType();
+
 
         if (position == 0) {
             return TYPE_HEAD;
         } else {
+            int type = data.getBody().get(position-1).getType();
 //            type = data.getBody().get(position-1).getType();
 //            LogUtils.s("---->position"+position+"--type-"+type);
             if (type == 0) {
@@ -125,6 +128,7 @@ public class HomeAdapter extends RecyclerView.Adapter implements BaseSliderView.
             titleViewHolder.tv6.setText(recommendInfos.get(5));
         } else if (itemViewType == TYPE_HEAD) {
 
+
             HeadViewHolder headViewHolder = (HeadViewHolder) holder;
 
             HashMap<String, String> url_map = new HashMap<>();
@@ -148,9 +152,11 @@ public class HomeAdapter extends RecyclerView.Adapter implements BaseSliderView.
                 textSliderView.bundle(new Bundle());
                 textSliderView.getBundle()
                         .putString("extra", s);
-
+                //添加之前,要先remoview掉
+                headViewHolder.sliderLayout.removeAllSliders();
                 headViewHolder.sliderLayout.addSlider(textSliderView);
             }
+
             headViewHolder.sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
             headViewHolder.sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
             headViewHolder.sliderLayout.setCustomAnimation(new DescriptionAnimation());

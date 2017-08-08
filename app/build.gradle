@@ -4,20 +4,42 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 
 android {
+    signingConfigs {
+        TakeOutMap {
+            keyAlias 'TakeOutKey'
+            keyPassword '123456'
+            storeFile file('H:/IealMobileSafeKey/TakeOutKey.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
+//    sourceSet { 在以来中添加之后,不许要在在这里重复的额添加类库的以来,不然会后冲突
+//        main {
+//            jnilibs.srcDirs = ['libs']
+//        }
+//    }
     defaultConfig {
         applicationId "cn.zzu.takeout"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        resConfigs "zh" //删除无用的语言包
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+//    渠道号, 和xml文件关联在一起,
+    productFlavors {
+        wandoujia {
+            //manifestPlaceholders = []
         }
     }
 }
@@ -40,13 +62,14 @@ dependencies {
     // 添加 dagger2
     //轮播图
     // 分组显示数据的三方控件
-
     //SMS其他的依赖
     compile name: 'SMSSDK-3.0.0', ext: 'aar'
     compile name: 'SMSSDKGUI-3.0.0', ext: 'aar'
-
     compile files('libs/MobCommons-2017.0607.1736.jar')
     compile files('libs/MobTools-2017.0607.1736.jar')
+    compile files('libs/Amap_2DMap_V5.2.0_20170627.jar')
+    compile files('libs/AMap_Location_V3.5.0_20170731.jar')
+    compile files('libs/AMap_Search_V5.2.1_20170630.jar')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'

@@ -5,9 +5,19 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">false</item>
 
+
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="ActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!--通过编辑器,colorParimaryDark指定状态栏的颜色-->
+        <!--<item name="colorTitle" >@colors/colorAccent</item>-->
+
+
+    </style>
+
 
 </resources>
